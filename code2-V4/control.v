@@ -302,14 +302,13 @@ begin
                 endcase
 
             mvr : begin
-                // 寄存器移动指令: 将源寄存器数据移动到目标寄存器
-                RFright_on_OpndBus          <= 1'b1;  // 将源寄存器数据放到操作数总线
-                B15to0                      <= 1'b1;  // 直接传递数据（不进行ALU运算）
-                sel_aluout_rfin             <= 1'b1;  // 选择ALU输出写入寄存器
-                RFLwrite                    <= 1'b1;  // 写入目标寄存器(低8位)
-                RFHwrite                    <= 1'b1;  // 写入目标寄存器(高8位)
-                PCplus1                     <= 1'b1;  // 更新程序计数器
-                EnablePC                    <= 1'b1;  // 使能程序计数器更新
+                RFright_on_OpndBus      <= 1'b1;  // 将源寄存器数据放到操作数总线上
+                B15to0                  <= 1'b1;  // 直接传递源寄存器数据
+                sel_aluout_rfin         <= 1'b1;  // 选择ALU输出到寄存器文件输入
+                RFLwrite                <= 1'b1;  // 写入目标寄存器低8位
+                RFHwrite                <= 1'b1;  // 写入目标寄存器高8位
+                PCplus1                 <= 1'b1;  // 程序计数器加1
+                EnablePC                <= 1'b1;  // 使能程序计数器
             end
 
             lda : begin
@@ -442,13 +441,25 @@ begin
             end
 
             b1111 :
-                case (Instruction[9: 8]) 
+                case (Instruction[9: 8])             
                 mil : begin
-                   //add your code here
+                    IR_on_LOpndBus          <= 1'b1;
+                    sel_aluout_rfin         <= 1'b1;
+                    B15to0                  <= 1'b1;
+                    RFLwrite                <= 1'b1;
+                    SRload                  <= 1'b1;
+                    PCplus1                 <= 1'b1;
+                    EnablePC                <= 1'b1;
                 end
 
                 mih : begin
-                   //add your code here
+                    IR_on_HOpndBus          <= 1'b1;
+                    sel_aluout_rfin         <= 1'b1;
+                    B15to0                  <= 1'b1;
+                    RFHwrite                <= 1'b1;
+                    SRload                  <= 1'b1;
+                    PCplus1                 <= 1'b1;
+                    EnablePC                <= 1'b1;
                 end
 
                 jpa : begin

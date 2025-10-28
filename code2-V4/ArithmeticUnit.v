@@ -36,13 +36,9 @@ reg  cout,zout;
 		cout = 0; aluout = 0;zout=0;
 		case ({B15to0, AandB, AorB, notB, shlB, shrB, AaddB, AsubB, AmulB, AcmpB})
 			`B15to0H:aluout = B;
-			`AandBH: aluout = A & B;
-			`AorBH:  aluout = A | B;
-			`notBH:  aluout = ~B;
-			`shlBH:  aluout = {B[14:0], B[15]};		//Rotate left
-			`shrBH:  aluout = {B[0], B[15:1]};		//Rotate right
-			`AaddBH: {cout, aluout} = A + B + cin;
-			`AsubBH: {cout, aluout} = A - B - cin;
+			
+            /*Add your code here*/
+
 			`AmulBH: aluout = A[7:0] * B[7:0];		//Prevent overflow
 			`AcmpBH: begin
 							aluout = A;
