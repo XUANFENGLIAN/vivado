@@ -302,7 +302,14 @@ begin
                 endcase
 
             mvr : begin
-              //add your code here
+                // 寄存器移动指令: 将源寄存器数据移动到目标寄存器
+                RFright_on_OpndBus          <= 1'b1;  // 将源寄存器数据放到操作数总线
+                B15to0                      <= 1'b1;  // 直接传递数据（不进行ALU运算）
+                sel_aluout_rfin             <= 1'b1;  // 选择ALU输出写入寄存器
+                RFLwrite                    <= 1'b1;  // 写入目标寄存器(低8位)
+                RFHwrite                    <= 1'b1;  // 写入目标寄存器(高8位)
+                PCplus1                     <= 1'b1;  // 更新程序计数器
+                EnablePC                    <= 1'b1;  // 使能程序计数器更新
             end
 
             lda : begin
