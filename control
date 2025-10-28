@@ -302,7 +302,19 @@ begin
                 endcase
 
             mvr : begin
-              //add your code here
+              // 寄存器到寄存器移动指令
+              // 设置源寄存器到操作数总线
+              RFright_on_OpndBus          <= 1'b1;
+              // 直接使用寄存器值作为输入
+              B15to0                      <= 1'b1;
+              // 选择寄存器输入进行写入
+              sel_rfin                    <= 1'b1;
+              // 写入目标寄存器（低16位）
+              RFLwrite                    <= 1'b1;
+              RFHwrite                    <= 1'b1;
+              // 更新程序计数器
+              PCplus1                     <= 1'b1;
+              EnablePC                    <= 1'b1;
             end
 
             lda : begin
@@ -437,11 +449,32 @@ begin
             b1111 :
                 case (Instruction[9: 8]) 
                 mil : begin
-                   //add your code here
+                   // 将立即数加载到低8位寄存器
+                   // 启用低8位操作数总线
+                   IR_on_LOpndBus             <= 1'b1;
+                   // 选择寄存器输入进行写入
+                   sel_rfin                   <= 1'b1;
+                   // 只写入寄存器低8位
+                   RFLwrite                   <= 1'b1;
+                   // 保持高位不变
+                   RFHwrite                   <= 1'b0;
+                   // 更新程序计数器
+                   PCplus1                    <= 1'b1;
+                   EnablePC                   <= 1'b1;
                 end
 
                 mih : begin
-                   //add your code here
+                   // 将立即数加载到高8位寄存器
+                   // 启用高8位操作数总线
+                   IR_on_HOpndBus             <= 1'b1;
+                   // 选择寄存器输入进行写入
+                   sel_rfin                   <= 1'b1;
+                   // 只写入寄存器高8位
+                   RFLwrite                   <= 1'b0;
+                   RFHwrite                   <= 1'b1;
+                   // 更新程序计数器
+                   PCplus1                    <= 1'b1;
+                   EnablePC                   <= 1'b1;
                 end
 
                 jpa : begin
