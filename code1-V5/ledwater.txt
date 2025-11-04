@@ -20,7 +20,7 @@ begin
 		cnt<=0;
 		clk_div<=0;
 	end
-	else if(cnt==32'd5_000_000)
+	else if(cnt==32'd50_000_000)
 			begin
 			clk_div<=~clk_div;
 			cnt<=0;

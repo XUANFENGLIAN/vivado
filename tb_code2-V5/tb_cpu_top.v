@@ -38,13 +38,17 @@ cpu_top test_cpu_top (
 initial                                                
 begin                                                                    
 	clk = 0;
-	forever #50 clk = ~clk;                      
+	forever #1 clk = ~clk;                      
 end
 
 initial                                                
 begin                                                  
-
-//Add your code here
+   ExternalReset = 0;
+   in = 8'b00000000;
+   #5; 
+   ExternalReset = 1;
+   #4000;
+    $stop;
  
 end                            
 endmodule
