@@ -38,7 +38,7 @@ cpu_top test_cpu_top (
 initial                                                
 begin                                                                    
 	clk = 0;
-	forever #5 clk = ~clk;                      
+	forever #50 clk = ~clk;                      
 end
 
 initial                                                

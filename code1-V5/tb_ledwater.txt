@@ -1,0 +1,29 @@
+module LEDwater_vlg_tst(); 
+
+reg clk; // 时钟信号
+reg rst_n; // 复位信号，低电平有效
+reg stop; // 开关信号
+wire [7:0] led; 
+// LEDwater模块的实例化
+LEDwater test_LEDwater (
+    .clk(clk),       // 时钟信号连接
+    .led(led),       // LED输出连接
+    .rst_n(rst_n),   // 复位信号连接
+    .stop(stop)  // 开关信号连接
+);
+parameter PERIOD=20; // 定义时钟周期为20个时间单位
+
+always #(PERIOD/2) clk = ~clk;   
+
+initial 
+begin  
+    clk = 0;
+    rst_n = 0; 
+    stop = 0;
+    #PERIOD rst_n = 1; 
+    #(PERIOD*8) stop = 1;
+    #(PERIOD*8) stop = 0; 
+    #(PERIOD*4) $stop;
+end  
+
+endmodule
