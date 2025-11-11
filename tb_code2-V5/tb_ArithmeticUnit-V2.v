@@ -43,8 +43,16 @@ module tb_ArithmeticUnit();
   initial begin
           #10 A=4'b1101;
           #10 B=4'b1101;
-
-          /* Add your code here */
+          #10 {B15to0, AandB, AorB, notB, shlB, shrB, AaddB, AsubB, AmulB, AcmpB} = `B15to0H;
+          #10 {B15to0, AandB, AorB, notB, shlB, shrB, AaddB, AsubB, AmulB, AcmpB} = `AandBH;
+          #10 {B15to0, AandB, AorB, notB, shlB, shrB, AaddB, AsubB, AmulB, AcmpB} = `AorBH;
+          #10 {B15to0, AandB, AorB, notB, shlB, shrB, AaddB, AsubB, AmulB, AcmpB} = `notBH;
+          #10 {B15to0, AandB, AorB, notB, shlB, shrB, AaddB, AsubB, AmulB, AcmpB} = `shlBH;
+          #10 {B15to0, AandB, AorB, notB, shlB, shrB, AaddB, AsubB, AmulB, AcmpB} = `shrBH;
+          #10 {B15to0, AandB, AorB, notB, shlB, shrB, AaddB, AsubB, AmulB, AcmpB} = `AaddBH;
+          #10 {B15to0, AandB, AorB, notB, shlB, shrB, AaddB, AsubB, AmulB, AcmpB} = `AsubBH;
+          #10 {B15to0, AandB, AorB, notB, shlB, shrB, AaddB, AsubB, AmulB, AcmpB} = `AmulBH;
+          #10 {B15to0, AandB, AorB, notB, shlB, shrB, AaddB, AsubB, AmulB, AcmpB} = `AcmpBH;
 
           #50 $stop;
         end
